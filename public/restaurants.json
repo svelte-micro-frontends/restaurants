@@ -1,24 +1,4 @@
-<script>
-let currentFilters = [];
-function filterRestaurants(ev) {
-const priceRange = ev.target.value;
-if(!currentFilters.includes(priceRange)) {
-currentFilters.push(priceRange);
-} else {
-currentFilters.pop(priceRange);
-}
-filteredRestaurants = currentFilters.length > 0 ? restaurants.filter(r => currentFilters.includes(r.priceRange)) : restaurants;
-
-}
-
-/*
-let restaurants = [];
-(async () => {
-const response = await fetch('https://content.demo.microfrontends.com/restaurants.json');
-restaurants = await response.json();
-})();
-*/
-let  restaurants = [
+[
   {
     id: '1',
     name: "Becky's Burgers",
@@ -149,71 +129,4 @@ let  restaurants = [
       { item: 'Dim sim', price: 1 },
     ],
   }
-];
-
-let filteredRestaurants = restaurants;
-
-</script>
-
-<main>
-<form>
-<label for="txtSearch">Search:</label>
-<input type="text" id="txtSearch"/>
-<label>Price range: </label>
-<label>$<input type="checkbox" value="$" on:click={filterRestaurants}/></label>
-<label>$$<input type="checkbox" value="$$" on:click={filterRestaurants}/></label>
-<label>$$$<input type="checkbox" value="$$$" on:click={filterRestaurants}/></label>
-<label>$$$$<input type="checkbox" value="$$$$" on:click={filterRestaurants}/></label>
-<button type="button">Clear</button>
-</form>
-<div class="restaurant-list">
-{#each filteredRestaurants as r}
-<a class="card" href="/restaurants/{r.id}">
-<h2>{r.name}</h2>
-<img src="http://localhost:5001/{r.imageSrc}" alt="{r.imageDescription}" />
-<p>{r.description}</p>
-</a>
-{/each}
-</div>
-
-</main>
-
-<style>
-main {
-  text-align: center;
-padding: 1em;
-         max-width: 240px;
-margin: 0 auto;
-}
-
-h1 {
-color: #ff3e00;
-       text-transform: uppercase;
-       font-size: 4em;
-       font-weight: 100;
-}
-
-@media (min-width: 640px) {
-  main {
-    max-width: none;
-  }
-}
-
-.restaurant-list {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-}
-
-.card {
-  display: inline-block;
-  width: 100%;
-  max-width: 350px;
-  margin: 0px 5px;
-}
-
-form {
-display: flex;
-justify-content: space-evenly;
-}
-</style>
+]
