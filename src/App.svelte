@@ -44,7 +44,7 @@ let restaurants = [];
     {#each restaurants as r}
       <a class="card" href="/order/{r.id}">
         <h2>{r.name}</h2>
-        <img src="http://localhost:5001/{r.imageSrc}" alt="{r.imageDescription}" />
+        <img src="https://content.demo.microfrontends.com/{r.imageSrc}" alt="{r.imageDescription}" />
         <p>{r.description}</p>
       </a>
     {/each}
