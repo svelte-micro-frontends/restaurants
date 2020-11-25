@@ -33,8 +33,9 @@ export default {
   output: {
     sourcemap: true,
     format: 'iife',
-    name: 'app',
-    file: 'public/build/bundle.js'
+    name: '@feedme/restaurants',
+    file: 'public/build/bundle.js',
+    extend: true
   },
   plugins: [
     svelte({

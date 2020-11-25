@@ -1,219 +1,101 @@
 <script>
-let currentFilters = [];
-function filterRestaurants(ev) {
-const priceRange = ev.target.value;
-if(!currentFilters.includes(priceRange)) {
-currentFilters.push(priceRange);
-} else {
-currentFilters.pop(priceRange);
-}
-filteredRestaurants = currentFilters.length > 0 ? restaurants.filter(r => currentFilters.includes(r.priceRange)) : restaurants;
+  let currentFilters = [];
+  function filterRestaurants(ev) {
+    const priceRange = ev.target.value;
+    if(!currentFilters.includes(priceRange)) {
+      currentFilters.push(priceRange);
+    } else {
+      currentFilters.pop(priceRange);
+    }
+    filteredRestaurants = currentFilters.length > 0 ? restaurants.filter(r => currentFilters.includes(r.priceRange)) : restaurants;
 
-}
-
-/*
-let restaurants = [];
-(async () => {
-const response = await fetch('https://content.demo.microfrontends.com/restaurants.json');
-restaurants = await response.json();
-})();
-*/
-let  restaurants = [
-  {
-    id: '1',
-    name: "Becky's Burgers",
-    priceRange: '$$',
-    imageSrc: '/images/1-burger.jpg',
-    imageDescription: 'A photo of a burger with fries and a milkshake',
-    description: 'Juicy burgers, crunchy fries, and creamy shakes',
-    menu: [
-      { item: 'Cheeseburger', price: 9 },
-      { item: 'Milkshake', price: 4 },
-      { item: 'Meal (burger, fries, and shake)', price: 15 },
-    ],
-  },
-  {
-    id: '2',
-    name: 'Chicken Nice',
-    priceRange: '$',
-    imageSrc: '/images/2-chicken-rice.jpg',
-    imageDescription: 'A photo of Hainanese chicken rice',
-    description: "The world's best Hainanese Chicken Rice",
-    menu: [
-      { item: 'Steamed chicken rice', price: 4 },
-      { item: 'Roast chicken rice', price: 4 },
-      { item: 'Steamed chicken rice set', price: 6 },
-    ],
-  },
-  {
-    id: '3',
-    name: "Nonna's pizza and pasta",
-    priceRange: '$$',
-    imageSrc: '/images/3-pizza.jpg',
-    imageDescription: 'A photo of a margherita pizza',
-    description: 'Classic pizza and pasta just like Nonna used to make',
-    menu: [
-      { item: 'Margherita pizza', price: 10 },
-      { item: 'Pepperoni pizza', price: 12 },
-      { item: 'Spaghetti bolognese', price: 15 },
-    ],
-  },
-  {
-    id: '4',
-    name: 'Super satay skewers',
-    priceRange: '$$',
-    imageSrc: '/images/4-satay.jpg',
-    imageDescription: 'A photo of some satay skewers with sauce',
-    description: "Satay so good it'll save the world",
-    menu: [
-      { item: '10 chicken satay', price: 7 },
-      { item: '10 mutton satay', price: 7 },
-      { item: '10 beef satay', price: 7 },
-    ],
-  },
-  {
-    id: '5',
-    name: 'Curry delights',
-    priceRange: '$$$',
-    imageSrc: '/images/5-curry.jpg',
-    imageDescription: 'A photo of Indian curries',
-    description: 'The best Indian curries from the freshest ingredients',
-    menu: [
-      { item: 'Dal fry', price: 8 },
-      { item: 'Garlic Naan', price: 3 },
-      { item: 'Paneer Makhani ', price: 15 },
-    ],
-  },
-  {
-    id: '6',
-    name: 'Sliced',
-    priceRange: '$',
-    imageSrc: '/images/6-sandwich.jpg',
-    imageDescription: 'A photo of a sandwich',
-    description: 'Fresh sandwiches at great prices',
-    menu: [
-      { item: 'BLT (bacon, lettuce, tomato)', price: 7 },
-      { item: 'Warm chicken sandwich', price: 6 },
-      { item: 'Chicken caesar salad', price: 5 },
-    ],
-  },
-  {
-    id: '7',
-    name: 'Taste of Iberia',
-    priceRange: '$$$$',
-    imageSrc: '/images/7-paella.jpg',
-    imageDescription: 'A photo of Spanish Paella',
-    description: 'Paella, tapas, and imported Spanish wines',
-    menu: [
-      { item: 'Seafood paella', price: 25 },
-      { item: 'Mixed tapas', price: 27 },
-      { item: '2012 Barbazul (Red)', price: 70 },
-    ],
-  },
-  {
-    id: '8',
-    name: 'Crunchy Crunch',
-    priceRange: '$$',
-    imageSrc: '/images/8-fried-chicken.jpg',
-    imageDescription: 'A photo of crispy fried chicken',
-    description: "The city's best Southern-style fried chicken",
-    menu: [
-      { item: '6 pc. chicken', price: 12 },
-      { item: '6 pc. boneless chicken', price: 15 },
-      { item: '2 pc. biscuits', price: 5 },
-    ],
-  },
-  {
-    id: '9',
-    name: "Japan's finest",
-    priceRange: '$$$',
-    imageSrc: '/images/9-sushi.jpg',
-    imageDescription: 'A photo of sushi and sashimi',
-    description: 'Only the freshest fish and tastiest katsu',
-    menu: [
-      { item: 'Mixed sushi platter', price: 20 },
-      { item: 'Mixed sashimi platter', price: 20 },
-      { item: 'Chicken katsu curry set', price: 18 },
-    ],
-  },
-  {
-    id: '10',
-    name: "Chippo's",
-    priceRange: '$',
-    imageSrc: '/images/10-fish-n-chips.jpg',
-    imageDescription: 'A photo of deep-fried fish with thick-cut hot chips',
-    description: 'Authentic Aussie-style fish n chips',
-    menu: [
-      { item: 'Fish n chips for 1', price: 8 },
-      { item: 'Potato cake', price: 1 },
-      { item: 'Dim sim', price: 1 },
-    ],
   }
-];
 
-let filteredRestaurants = restaurants;
+let restaurants = [];
+  let promise  = fetch('https://api.jsonbin.io/b/5fbded3990e7c66167f6aa01', {
+    headers: {
+      'secret-key': '$2b$10$WgrEnl6Ev9ry0rK.KNhgo.lGZjT0PEuOnXTSfRAd61nH5SOrvoPz.'
+    }
+  }).then(r => { 
+    let data = r.json();
+    restaurants = data;
+    return data;
+  });
+  
+  let filteredRestaurants = restaurants;
 
 </script>
 
-<main>
-<form>
-<label for="txtSearch">Search:</label>
-<input type="text" id="txtSearch"/>
-<label>Price range: </label>
-<label>$<input type="checkbox" value="$" on:click={filterRestaurants}/></label>
-<label>$$<input type="checkbox" value="$$" on:click={filterRestaurants}/></label>
-<label>$$$<input type="checkbox" value="$$$" on:click={filterRestaurants}/></label>
-<label>$$$$<input type="checkbox" value="$$$$" on:click={filterRestaurants}/></label>
-<button type="button">Clear</button>
-</form>
-<div class="restaurant-list">
-{#each filteredRestaurants as r}
-<a class="card" href="/restaurants/{r.id}">
-<h2>{r.name}</h2>
-<img src="http://localhost:5001/{r.imageSrc}" alt="{r.imageDescription}" />
-<p>{r.description}</p>
-</a>
-{/each}
-</div>
+<main id="restaurants">
+  <form>
+    <label for="txtSearch">Search:</label>
+    <input type="text" id="txtSearch"/>
+    <label>Price range: </label>
+    <label>$<input type="checkbox" value="$" on:click={filterRestaurants}/></label>
+    <label>$$<input type="checkbox" value="$$" on:click={filterRestaurants}/></label>
+    <label>$$$<input type="checkbox" value="$$$" on:click={filterRestaurants}/></label>
+    <label>$$$$<input type="checkbox" value="$$$$" on:click={filterRestaurants}/></label>
+    <button type="button">Clear</button>
+  </form>
+  {#await promise}
+  <h2>Loading...</h2>
+{:then restaurants}
+  <div class="restaurant-list">
+    {#each restaurants as r}
+      <a class="card" href="/order/{r.id}">
+        <h2>{r.name}</h2>
+        <img src="http://localhost:5001/{r.imageSrc}" alt="{r.imageDescription}" />
+        <p>{r.description}</p>
+      </a>
+    {/each}
+  </div>
 
+{:catch error}
+  <h2>Some unknown error occurred, can't able to fetch the restaurants.</h2>
+{/await}
 </main>
 
 <style>
-main {
-  text-align: center;
-padding: 1em;
-         max-width: 240px;
-margin: 0 auto;
-}
-
-h1 {
-color: #ff3e00;
-       text-transform: uppercase;
-       font-size: 4em;
-       font-weight: 100;
-}
-
-@media (min-width: 640px) {
   main {
-    max-width: none;
+    text-align: center;
+    padding: 1em;
+    max-width: 240px;
+    margin: 0 auto;
   }
-}
 
-.restaurant-list {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-}
+  #restaurants {
+    max-width: 1150px;
+    margin: 0 auto;
+  }
 
-.card {
-  display: inline-block;
-  width: 100%;
-  max-width: 350px;
-  margin: 0px 5px;
-}
+  h1 {
+    color: #ff3e00;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+  }
 
-form {
-display: flex;
-justify-content: space-evenly;
-}
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
+
+  .restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .card {
+    display: inline-block;
+    width: 100%;
+    max-width: 350px;
+    margin: 0px 5px;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-evenly;
+  }
 </style>
