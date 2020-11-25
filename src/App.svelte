@@ -1,4 +1,5 @@
 <script>
+  import { Router, Link } from "svelte-routing";
   let currentFilters = [];
   function filterRestaurants(ev) {
     const priceRange = ev.target.value;
@@ -23,9 +24,11 @@ let restaurants = [];
   });
   
   let filteredRestaurants = restaurants;
+  export let url;
 
 </script>
 
+<Router url="{url}">
 <main id="restaurants">
   <form>
     <label for="txtSearch">Search:</label>
@@ -42,11 +45,14 @@ let restaurants = [];
 {:then restaurants}
   <div class="restaurant-list">
     {#each restaurants as r}
-      <a class="card" href="/order/{r.id}">
+
+      <Link to="/order/{r.id}">
+      <div class="card">
         <h2>{r.name}</h2>
-        <img src="https://content.demo.microfrontends.com/{r.imageSrc}" alt="{r.imageDescription}" />
+        <img src="https://content.demo.microfrontends.com{r.imageSrc}" alt="{r.imageDescription}" />
         <p>{r.description}</p>
-      </a>
+      </div>
+      </Link>
     {/each}
   </div>
 
@@ -54,6 +60,7 @@ let restaurants = [];
   <h2>Some unknown error occurred, can't able to fetch the restaurants.</h2>
 {/await}
 </main>
+</Router>
 
 <style>
   main {
@@ -66,13 +73,6 @@ let restaurants = [];
   #restaurants {
     max-width: 1150px;
     margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
   }
 
   @media (min-width: 640px) {
